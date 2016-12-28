@@ -8,6 +8,8 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.QueueingConsumer;
 import com.rabbitmq.client.AMQP.BasicProperties;
+
+import java.util.Date;
 import java.util.UUID;
 
 public class RPCClient {
@@ -33,6 +35,7 @@ public class RPCClient {
         String response = null;
         String corrId = UUID.randomUUID().toString();
 
+        System.out.println("replyQueueName is: " + replyQueueName);
         BasicProperties props = new BasicProperties
                 .Builder()
                 .correlationId(corrId)
@@ -62,9 +65,9 @@ public class RPCClient {
         try {
             fibonacciRpc = new RPCClient();
 
-            System.out.println(" [x] Requesting fib(30)");
+            System.out.println(" [x] Requesting fib(30) " + new Date());
             response = fibonacciRpc.call("30");
-            System.out.println(" [.] Got '" + response + "'");
+            System.out.println(" [.] Got '" + response + "'" + " " + new Date());
         }
         catch  (Exception e) {
             e.printStackTrace();
