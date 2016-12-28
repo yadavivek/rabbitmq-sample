@@ -26,6 +26,7 @@ public class ReceiveLogsDirect {
         }
 
         for(String severity : argv){
+            System.out.println("Bound severity with " + severity);
             channel.queueBind(queueName, EXCHANGE_NAME, severity);
         }
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
